@@ -4,8 +4,7 @@
 -----
 
 
-功能：Features:
------
+### 功能：Features:
 
     1. 支持 GIF/APNG 无缝切换。Seamless switching animation GIF/APNG.
 
@@ -17,14 +16,12 @@
 -----
 
 
-Android使用：For Android:
------
+## Android使用：For Android:
 
-    ![](https://raw.githubusercontent.com/NeedJava1980/GifApngPlayer/master/snapshot/AnimatedPlayer2.gif)
+![](https://raw.githubusercontent.com/NeedJava1980/GifApngPlayer/master/snapshot/AnimatedPlayer2.gif)
 
 
-如何开始：How to start:
------
+### 如何开始：How to start:
 
     AnimateManager mManager = new AnimateManager();
 
@@ -37,8 +34,7 @@ Android使用：For Android:
     mManager.restart( mManager.getInputStream() );
 
 
-更改 GIF/APNG 文件（有文件后缀）：Change GIF/APNG file (Has file extension):
------
+### 更改 GIF/APNG 文件（有文件后缀）：Change GIF/APNG file (Has file extension):
 
     mManager.setTerminated();
 
@@ -47,8 +43,7 @@ Android使用：For Android:
     mManager.restart( mManager.getInputStream() );
 
 
-更改 GIF/APNG 文件（无文件后缀）：Change GIF/APNG file (No file extension):
------
+### 更改 GIF/APNG 文件（无文件后缀）：Change GIF/APNG file (No file extension):
 
     mManager.setTerminated();
 
@@ -59,8 +54,7 @@ Android使用：For Android:
     mManager.restart( mManager.getInputStream() );
 
 
-更改 GIF/APNG 渲染画布：Change GIF/APNG rendering view:
------
+### 更改 GIF/APNG 渲染画布：Change GIF/APNG rendering view:
 
     mManager.setTerminated();
 
@@ -71,14 +65,12 @@ Android使用：For Android:
     mManager.restart( mManager.getInputStream() );
 
 
-暂停 或 继续：Pause or Resume:
------
+### 暂停 或 继续：Pause or Resume:
 
     mManager.setPaused( ! mManager.isPaused() );
 
 
-不要忘记：DO NOT forget:
------
+### 不要忘记：DO NOT forget:
 
     mManager.setTerminated();
 
@@ -86,14 +78,12 @@ Android使用：For Android:
 -----
 
 
-Swing使用：For Java Swing:
------
+## Swing使用：For Java Swing:
 
-    ![](https://raw.githubusercontent.com/NeedJava1980/GifApngPlayer/master/snapshot/AnimatedPlayer1.gif)
+![](https://raw.githubusercontent.com/NeedJava1980/GifApngPlayer/master/snapshot/AnimatedPlayer1.gif)
 
 
-如何开始：How to start:
------
+### 如何开始：How to start:
 
     AnimateManager mManager = new AnimateManager();
 
@@ -104,8 +94,7 @@ Swing使用：For Java Swing:
     mManager.restart( mManager.getInputStream() );
 
 
-更改 GIF/APNG 文件（有文件后缀）：Change GIF/APNG file (Has file extension):
------
+### 更改 GIF/APNG 文件（有文件后缀）：Change GIF/APNG file (Has file extension):
 
     mManager.setTerminated();
 
@@ -114,8 +103,7 @@ Swing使用：For Java Swing:
     mManager.restart( mManager.getInputStream() );
 
 
-更改 GIF/APNG 文件（无文件后缀）：Change GIF/APNG file (No file extension):
------
+### 更改 GIF/APNG 文件（无文件后缀）：Change GIF/APNG file (No file extension):
 
     mManager.setTerminated();
 
@@ -126,8 +114,7 @@ Swing使用：For Java Swing:
     mManager.restart( mManager.getInputStream() );
 
 
-更改 GIF/APNG 渲染画布：Change GIF/APNG rendering view:
------
+### 更改 GIF/APNG 渲染画布：Change GIF/APNG rendering view:
 
     mManager.setTerminated();
 
@@ -136,14 +123,12 @@ Swing使用：For Java Swing:
     mManager.restart( mManager.getInputStream() );
 
 
-暂停 或 继续：Pause or Resume:
------
+### 暂停 或 继续：Pause or Resume:
 
     mManager.setPaused( ! mManager.isPaused() );
 
 
-注意不要忘记：DO NOT forget:
------
+### 注意不要忘记：DO NOT forget:
 
     mManager.setTerminated();
 
@@ -151,7 +136,6 @@ Swing使用：For Java Swing:
 -----
 
 
-捐赠：Donate:
------
+### 捐赠：Donate:
 
-    [Donate](https://paypal.me/needjava?locale.x=zh_XC)
+[PayPal](https://paypal.me/needjava?locale.x=zh_XC)
