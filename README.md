@@ -18,7 +18,7 @@
 
 ## Android使用：For Android:
 
-![](https://raw.githubusercontent.com/NeedJava1980/GifApngPlayer/master/snapshot/AnimatedPlayer2.gif)
+![](https://raw.githubusercontent.com/NeedJava1980/GifApngPlayer/master/snapshot/AnimatedPlayer2.gif?token=AFLFM3SRLY7CRMKX3KVWQE245AAGU)
 
 
 ### 如何开始：How to start:
@@ -80,7 +80,7 @@
 
 ## Swing使用：For Java Swing:
 
-![](https://raw.githubusercontent.com/NeedJava1980/GifApngPlayer/master/snapshot/AnimatedPlayer1.gif)
+![](https://raw.githubusercontent.com/NeedJava1980/GifApngPlayer/master/snapshot/AnimatedPlayer1.gif?token=AFLFM3Q6T2GLXZJL6K4UFLC45AAAM)
 
 
 ### 如何开始：How to start:
@@ -139,3 +139,5 @@
 ### 捐赠：Donate:
 
 [PayPal](https://paypal.me/needjava?locale.x=zh_XC)
+
+![Alipay](https://raw.githubusercontent.com/NeedJava1980/GifApngPlayer/master/snapshot/alipay.png?token=AFLFM3XNPSGSTXITDK2VODS45AA3Y)
