@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="APPLICATION_NAME">GIF/APNG Player v1.1</string>
+
+    <string name="CHECKBOX_REDUCE">Reduce Size</string>
+
+    <string name="CHECKBOX_SURFACE">Use SurfaceView</string>
+
+    <string name="BUTTON_OPEN">Open</string>
+
+    <string name="BUTTON_PAUSE">Pause</string>
+
+    <string name="BUTTON_RESUME">Resume</string>
+
+    <string name="BUTTON_FINISH">Finish</string>
+
+    <string name="BUTTON_REPLAY">Replay</string>
+
+    <string name="NOTICE_MESSAGE">Use release build to verify the performance of big GIF/APNG\n\n©NeedJava1980@gmail.com</string>
+
+</resources>
