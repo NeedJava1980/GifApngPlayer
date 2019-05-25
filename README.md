@@ -89,7 +89,7 @@
 
     mManager.setFile( new java.io.File( "sample.gif" ) );
 
-    mManager.setView( yourLabel );  //javax.swing.JLabel
+    mManager.setView( mLabel );  //javax.swing.JLabel
 
     mManager.restart( mManager.getInputStream() );
 
@@ -118,7 +118,7 @@
 
     mManager.setTerminated();
 
-    mManager.setView( yourLabel );  //javax.swing.JLabel
+    mManager.setView( mLabel );  //javax.swing.JLabel
 
     mManager.restart( mManager.getInputStream() );
 
