@@ -1,9 +1,6 @@
 # GifApngPlayer
 
 
------
-
-
 ### 功能：Features:
 
     1. 支持 GIF/APNG 无缝切换。Seamless switching animation GIF/APNG.
@@ -11,9 +8,6 @@
     2. 支持 Android/Java Swing。Support Android/Java Swing.
 
     3. 支持暂停和继续动画。Support Pause/Resume animation.
-
-
------
 
 
 ## Android使用：For Android:
@@ -75,9 +69,6 @@
     mManager.setTerminated();
 
 
------
-
-
 ## Swing使用：For Java Swing:
 
 ![](https://github.com/NeedJava1980/GifApngPlayer/raw/master/snapshot/AnimatedPlayer1.gif)
@@ -131,9 +122,6 @@
 ### 注意不要忘记：DO NOT forget:
 
     mManager.setTerminated();
-
-
------
 
 
 ### 捐赠：Donate:
