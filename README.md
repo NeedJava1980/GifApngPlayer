@@ -124,7 +124,7 @@
     mManager.setTerminated();
 
 
-### 捐赠：Donate:
+## 捐赠：Donate:
 
 [PayPal](https://paypal.me/needjava?locale.x=zh_XC)
 
