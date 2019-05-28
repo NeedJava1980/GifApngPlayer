@@ -48,7 +48,7 @@
     mManager.restart( mManager.getInputStream() );
 
 
-### 从 drawable/mipmap/raw 读取文件（无文件后缀）：Read resource file from drawable/mipmap/raw (No file extension):
+### 从 drawable/mipmap/raw 读取文件：Read resource file from drawable/mipmap/raw:
 
     final Uri uri = Uri.parse( "android.resource://" + getPackageName() + "/" + R.drawable.sample );
 
