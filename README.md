@@ -48,6 +48,19 @@
     mManager.restart( mManager.getInputStream() );
 
 
+### 从 drawable/mipmap/raw 读取文件（无文件后缀）：Read resource file from drawable/mipmap/raw (No file extension):
+
+    final Uri uri = Uri.parse( "android.resource://" + getPackageName() + "/" + R.drawable.sample );
+
+    mManager.setTerminated();
+
+    mManager.setUri( uri );  //MUST after setView, sample.gif or sample.png
+
+    mManager.setType( AnimateManager.TYPE_GIF );  //AnimateManager.TYPE_GIF or AnimateManager.TYPE_APNG
+
+    mManager.restart( mManager.getInputStream() );
+
+
 ### 更改 GIF/APNG 渲染画布：Change GIF/APNG rendering view:
 
     mManager.setTerminated();
@@ -64,7 +77,7 @@
     mManager.setPaused( ! mManager.isPaused() );
 
 
-### 不要忘记：DO NOT forget:
+### 注意不要忘记：DO NOT forget:
 
     mManager.setTerminated();
 
