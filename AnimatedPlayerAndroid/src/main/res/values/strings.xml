@@ -2,7 +2,7 @@
 
 <resources>
 
-    <string name="APPLICATION_NAME">GIF/APNG Player v1.1</string>
+    <string name="APPLICATION_NAME">GIF/APNG Player v1.2</string>
 
     <string name="CHECKBOX_REDUCE">Reduce Size</string>
 

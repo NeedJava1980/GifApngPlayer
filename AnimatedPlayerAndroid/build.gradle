@@ -1,14 +1,14 @@
-apply plugin: 'com.android.application'
+apply plugin: "com.android.application"
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.needjava.animateplayer"
-        minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 6
+        versionName "1.6"
     }
 
     //NOTE:Remember to request permission in Activity when you change targetSdkVersion from 22 to 26
@@ -16,11 +16,11 @@ android {
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
 }
 
 dependencies {
-    implementation files('libs/needjavaanimated.jar')
+    implementation files("libs/needjavaanimated.jar")
 }

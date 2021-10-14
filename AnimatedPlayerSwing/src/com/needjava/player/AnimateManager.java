@@ -11,12 +11,13 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
 import com.needjava.animate.Decoder;
-import com.needjava.animate.GifDecoder;
-import com.needjava.animate.ApngDecoder;
+import com.needjava.animate.DecoderGif;
+import com.needjava.animate.DecoderApng;
 import com.needjava.animate.AnimateFrame;
 import com.needjava.animate.AnimateReader;
 import com.needjava.animate.AnimateBalancer;
 import com.needjava.animate.AnimateRenderer;
+import com.needjava.animate.AnimateReadListener;
 import com.needjava.animate.AnimateRendererListener;
 
 /**
@@ -29,6 +30,8 @@ public final class AnimateManager
     public static final int TYPE_GIF      = 1;
 
     public static final int TYPE_APNG     = 2;
+
+    private AnimateReadListener mListener;
 
     private File mFile;
 
@@ -44,7 +47,12 @@ public final class AnimateManager
 
     private AnimateRenderer mRenderer;
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public final void setListener( final AnimateReadListener listener )
+    {
+        mListener = listener;
+    }
 
     public final void setFile( final File file )
     {
@@ -63,7 +71,7 @@ public final class AnimateManager
         mView = view;
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public final boolean isReduceSize()
     {
@@ -75,7 +83,7 @@ public final class AnimateManager
         mIsReduceSize = isReduceSize;
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public final boolean isSeekable()
     {
@@ -87,7 +95,7 @@ public final class AnimateManager
         mIsSeekable = isSeekable;
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public final boolean isPaused()
     {
@@ -101,7 +109,7 @@ public final class AnimateManager
         if( mRenderer != null ){ mRenderer.setPaused( paused ); }  //Step 1. Pause mRenderer
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public final boolean isTerminated()
     {
@@ -115,7 +123,7 @@ public final class AnimateManager
         if( mRenderer != null ){ mRenderer.setTerminated(); }  //Step 2. Terminate renderer
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public final void restart( final InputStream input )
     {
@@ -125,9 +133,9 @@ public final class AnimateManager
 
         final AnimateBalancer balancer = new AnimateBalancer( mRenderer, mIsReduceSize );
 
-        final Decoder decoder = ( mType == TYPE_GIF ? new GifDecoder( balancer ) : ( mType == TYPE_APNG ? new ApngDecoder( balancer ) : null ) );
+        final Decoder decoder = ( mType == TYPE_GIF ? new DecoderGif( balancer ) : ( mType == TYPE_APNG ? new DecoderApng( balancer ) : null ) );
 
-        mReader = new AnimateReader( input, decoder ); mReader.start();  //Step4. New reader, start and begin decoding
+        mReader = new AnimateReader( mListener, input, decoder ); mReader.start();  //Step4. New reader, start and begin decoding
     }
 
     public final InputStream getInputStream()  //NOTE:Network should download GIF/APNG firstly, then try to open file from disk
@@ -137,7 +145,7 @@ public final class AnimateManager
         catch( Exception e ){ e.printStackTrace(); return null; }
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private final int getTypeFromSuffix( final File file )
     {
@@ -148,7 +156,7 @@ public final class AnimateManager
         return ( path.endsWith( ".gif" ) ? TYPE_GIF : ( path.endsWith( ".png" ) ? TYPE_APNG : TYPE_UNKNOWN ) );
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private final class SwingAnimateRenderer extends AnimateRenderer
     {
@@ -157,7 +165,7 @@ public final class AnimateManager
             super( listener, mIsSeekable, false/*HARDCODE*/ );
         }
 
-        @Override public final boolean onNotifyRenderer( final AnimateFrame frame, final int frameCount, final int frameIndex )
+        @Override public final boolean onNotifyRenderer( final AnimateFrame frame, final int frameCount, final int frameIndex, final boolean fromRenderer )
         {
             if( mView == null || frame == null ){ return false; }
 
@@ -165,7 +173,7 @@ public final class AnimateManager
 
             //try{ javax.imageio.ImageIO.write( image, "png", new java.io.File( new java.io.File( System.getProperty( "user.home" ), "Pictures" ), frameIndex + ".png" ) ); }catch( Exception e ){}
 
-            SwingUtilities.invokeLater( new Runnable(){ public final void run(){ mView.setIcon( new ImageIcon( image ) ); mView.repaint(); } });
+            SwingUtilities.invokeLater( new Runnable(){ @Override public final void run(){ mView.setIcon( new ImageIcon( image ) ); mView.repaint(); } } );
 
             return true;
         }

@@ -1,9 +1,5 @@
 package com.needjava.animateplayer;
 
-import java.io.InputStream;
-
-import android.Manifest;
-
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -12,32 +8,18 @@ import android.net.Uri;
 
 import android.view.View;
 import android.view.SurfaceView;
-import android.view.SurfaceHolder;
 
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.CompoundButton;
 
 import android.content.Intent;
 
-import android.content.pm.PackageManager;
-
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.PixelFormat;
 
-import com.needjava.animate.Decoder;
-import com.needjava.animate.GifDecoder;
-import com.needjava.animate.ApngDecoder;
-import com.needjava.animate.AnimateFrame;
-import com.needjava.animate.AnimateReader;
-import com.needjava.animate.AnimateBalancer;
-import com.needjava.animate.AnimateRenderer;
-import com.needjava.animate.AnimateRendererListener;
+import com.needjava.animate.AnimateReadListener;
 
 /**
  * NOTE:Use release build, the release build has better performance than the debug build.
@@ -45,6 +27,8 @@ import com.needjava.animate.AnimateRendererListener;
  * @author NeedJava1980@gmail.com 08/16/2017
  *
  * @version 04/21/2019 APNG support
+ *
+ * @version 10/14/2021 Add AnimateReadListener
  */
 public final class MainActivity extends Activity
 {
@@ -96,6 +80,8 @@ public final class MainActivity extends Activity
             mManager.setView( mCheckSurface.isChecked() ? mSurfaceView : mImageView );
 
             mManager.setUri( data.getData() );  //NOTE:This call must after setView()
+
+            mManager.setListener( new AndroidAnimateReadListener() );
 
             mManager.restart( mManager.getInputStream() );
         }
@@ -158,7 +144,7 @@ public final class MainActivity extends Activity
 
         mButtonOpen.setOnClickListener( new View.OnClickListener()
         {
-            @Override public final void onClick( final View v )
+            @Override public final void onClick( final View view )
             {
                 selectAnimatedImage();
             }
@@ -172,7 +158,7 @@ public final class MainActivity extends Activity
 
         mButtonPause.setOnClickListener( new View.OnClickListener()
         {
-            @Override public final void onClick( final View v )
+            @Override public final void onClick( final View view )
             {
                 if( mManager == null || mButtonPause == null ){ return; }
 
@@ -199,7 +185,7 @@ public final class MainActivity extends Activity
 
         mButtonFinish.setOnClickListener( new View.OnClickListener()
         {
-            @Override public final void onClick( final View v )
+            @Override public final void onClick( final View view )
             {
                 if( mManager == null || mButtonFinish == null ){ return; }
 
@@ -238,5 +224,17 @@ public final class MainActivity extends Activity
         intent.addCategory( Intent.CATEGORY_OPENABLE );
 
         startActivityForResult( intent, SELECT_ANIMATE );
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private final class AndroidAnimateReadListener implements AnimateReadListener
+    {
+        @Override public final void onReadFailed( final int status, final Object object )
+        {
+            //TODO:If failed to animate images, do something like closing player, closing window
+
+            System.err.println( object );
+        }
     }
 }

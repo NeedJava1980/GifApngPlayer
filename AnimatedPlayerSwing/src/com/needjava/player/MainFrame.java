@@ -27,6 +27,8 @@ import javax.swing.event.ChangeListener;
 
 import javax.swing.filechooser.FileFilter;
 
+import com.needjava.animate.AnimateReadListener;
+
 /**
  * @author NeedJava1980@gmail.com 08/16/2017
  */
@@ -46,7 +48,7 @@ public final class MainFrame extends JFrame
 
     private static final String BUTTON_REPLAY             = "Replay";
 
-    private static final String FRAME_TITLE               = "GIF/APNG Player v1.1 ©NeedJava1980@gmail.com";
+    private static final String FRAME_TITLE               = "GIF/APNG Player v1.2 ©NeedJava1980@gmail.com";
 
     private static final String CHOOSER_TITLE             = "Select GIF/APNG file";
 
@@ -54,7 +56,7 @@ public final class MainFrame extends JFrame
 
     private static final String STORED_LAST_PATH_FILE     = "last_path.txt";
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private AnimateManager mManager;
 
@@ -72,7 +74,7 @@ public final class MainFrame extends JFrame
     {
         SwingUtilities.invokeLater( new Runnable()
         {
-            public final void run()
+            @Override public final void run()
             {
                 final MainFrame frame = new MainFrame();
 
@@ -89,25 +91,25 @@ public final class MainFrame extends JFrame
         } );
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private final void createViews()
     {
         mManager = new AnimateManager();
 
-        ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         final JPanel buttonPane = new JPanel();
 
         buttonPane.setBorder( BorderFactory.createEmptyBorder( 5, 5, 5, 5 ) );
 
-        ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         mAnimateView = new JLabel();
 
         mAnimateView.setHorizontalAlignment( JLabel.CENTER );
 
-        ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         mCheckReduceSize = new JCheckBox( CHECKBOX_REDUCE );
 
@@ -127,7 +129,7 @@ public final class MainFrame extends JFrame
 
         buttonPane.add( mCheckReduceSize );
 
-        ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         mButtonOpen = new JButton( BUTTON_OPEN );
 
@@ -161,7 +163,9 @@ public final class MainFrame extends JFrame
 
                     mButtonFinish.setEnabled( true );
 
-                    ////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////////////////
+
+                    mManager.setListener( new SwingAnimateReadListener() );
 
                     mManager.setFile( file );
 
@@ -174,9 +178,9 @@ public final class MainFrame extends JFrame
             }
         } );
 
-        buttonPane.add( mButtonOpen ); 
+        buttonPane.add( mButtonOpen );
 
-        ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         mButtonPause = new JButton( BUTTON_PAUSE );
 
@@ -205,9 +209,9 @@ public final class MainFrame extends JFrame
             }
         } );
 
-        buttonPane.add( mButtonPause ); 
+        buttonPane.add( mButtonPause );
 
-        ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         mButtonFinish = new JButton( BUTTON_FINISH );
 
@@ -246,7 +250,7 @@ public final class MainFrame extends JFrame
 
         buttonPane.add( mButtonFinish );
 
-        ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         getContentPane().add( BorderLayout.CENTER, mAnimateView );
 
@@ -301,7 +305,7 @@ public final class MainFrame extends JFrame
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private final class AnimateFileFilter extends FileFilter
     {
@@ -314,6 +318,16 @@ public final class MainFrame extends JFrame
             final String fileName = file.getName().toLowerCase();
 
             return ( file.isDirectory() || fileName.endsWith( ".gif" ) || fileName.endsWith( ".png" ) );
+        }
+    }
+
+    private final class SwingAnimateReadListener implements AnimateReadListener
+    {
+        @Override public final void onReadFailed( final int status, final Object object )
+        {
+            //TODO:If failed to animate images, do something like closing player, closing window
+
+            System.err.println( object );
         }
     }
 }

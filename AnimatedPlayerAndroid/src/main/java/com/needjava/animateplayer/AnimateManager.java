@@ -16,12 +16,13 @@ import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 
 import com.needjava.animate.Decoder;
-import com.needjava.animate.GifDecoder;
-import com.needjava.animate.ApngDecoder;
+import com.needjava.animate.DecoderGif;
+import com.needjava.animate.DecoderApng;
 import com.needjava.animate.AnimateFrame;
 import com.needjava.animate.AnimateReader;
 import com.needjava.animate.AnimateBalancer;
 import com.needjava.animate.AnimateRenderer;
+import com.needjava.animate.AnimateReadListener;
 import com.needjava.animate.AnimateRendererListener;
 
 /**
@@ -34,6 +35,8 @@ public final class AnimateManager implements SurfaceHolder.Callback
     public static final int TYPE_GIF      = 1;
 
     public static final int TYPE_APNG     = 2;
+
+    private AnimateReadListener mListener;
 
     private Uri mUri;
 
@@ -73,6 +76,11 @@ public final class AnimateManager implements SurfaceHolder.Callback
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public final void setListener( final AnimateReadListener listener )
+    {
+        mListener = listener;
+    }
 
     public final void setUri( final Uri uri )
     {
@@ -180,9 +188,9 @@ public final class AnimateManager implements SurfaceHolder.Callback
 
             final AnimateBalancer balancer = new AnimateBalancer( mRenderer, mIsReduceSize );
 
-            final Decoder decoder = ( mType == TYPE_GIF ? new GifDecoder( balancer ) : ( mType == TYPE_APNG ? new ApngDecoder( balancer ) : null ) ); if( decoder == null ){ return; }
+            final Decoder decoder = ( mType == TYPE_GIF ? new DecoderGif( balancer ) : ( mType == TYPE_APNG ? new DecoderApng( balancer ) : null ) ); if( decoder == null ){ return; }
 
-            mReader = new AnimateReader( input, decoder ); mReader.start();  //Step4. New reader, start and begin decoding
+            mReader = new AnimateReader( mListener, input, decoder ); mReader.start();  //Step4. New reader, start and begin decoding
         }
         else if( mView instanceof ImageView )
         {
@@ -192,9 +200,9 @@ public final class AnimateManager implements SurfaceHolder.Callback
 
             final AnimateBalancer balancer = new AnimateBalancer( mRenderer, mIsReduceSize );
 
-            final Decoder decoder = ( mType == TYPE_GIF ? new GifDecoder( balancer ) : ( mType == TYPE_APNG ? new ApngDecoder( balancer ) : null ) ); if( decoder == null ){ return; }
+            final Decoder decoder = ( mType == TYPE_GIF ? new DecoderGif( balancer ) : ( mType == TYPE_APNG ? new DecoderApng( balancer ) : null ) ); if( decoder == null ){ return; }
 
-            mReader = new AnimateReader( input, decoder ); mReader.start();  //Step4. New reader, start and begin decoding
+            mReader = new AnimateReader( mListener, input, decoder ); mReader.start();  //Step4. New reader, start and begin decoding
         }
     }
 
@@ -227,7 +235,7 @@ public final class AnimateManager implements SurfaceHolder.Callback
             this.mPaint = new Paint();
         }
 
-        @Override public final boolean onNotifyRenderer( final AnimateFrame frame, final int frameCount, final int frameIndex )
+        @Override public final boolean onNotifyRenderer( final AnimateFrame frame, final int frameCount, final int frameIndex, final boolean fromRenderer )
         {
             if( frame == null || mHolder == null ){ return false; }
 
@@ -273,7 +281,7 @@ public final class AnimateManager implements SurfaceHolder.Callback
             this.mImageView = imageView;
         }
 
-        @Override public final boolean onNotifyRenderer( final AnimateFrame frame, final int frameCount, final int frameIndex )
+        @Override public final boolean onNotifyRenderer( final AnimateFrame frame, final int frameCount, final int frameIndex, final boolean fromRenderer )
         {
             if( mImageView == null || frame == null ){ return false; }
 
